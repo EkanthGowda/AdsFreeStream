@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all live streams on AdsFreeStream">
+    <title>AdsFreeStream - All Streams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-indicator {
+            background: #ff3838;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Stream Grid */
+        .stream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .stream-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .stream-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+        }
+
+        .stream-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            background: #000;
+            overflow: hidden;
+        }
+
+        .stream-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff3838;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            animation: pulse 2s infinite;
+        }
+
+        .viewers-count {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+        }
+
+        .stream-info {
+            padding: 20px;
+        }
+
+        .stream-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .stream-meta {
+            color: #888;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-tag {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 2px solid #333;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .copyright {
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stream-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">🎬 AdsFreeStream</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#live">Live Streams</a>
+                <a href="https://www.youtube.com/channel/UC51-9yJC_sBJgNuzW-d9EuA" target="_blank">Channel</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>🎬 Watch Live Streams</h1>
+        <p>Premium ad-free streaming experience. Choose from our live streams below.</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        
+        <!-- Live Streams Section -->
+        <div id="live">
+            <h2 class="section-title">
+                <span class="live-indicator">🔴 LIVE NOW</span>
+                Live Streams (<span id="stream-count">0</span>)
+            </h2>
+
+            <div class="stream-grid" id="stream-grid">
+                <!-- Streams loaded dynamically -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #888;">
+                    <h3 style="color: #4ecdc4; margin-bottom: 15px;">No streams available</h3>
+                    <p>Check back soon for new streams!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div style="font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">
+                AdsFreeStream
+            </div>
+            <p style="color: #888;">
+                Professional streaming platform for the modern creator
+            </p>
+            <div style="margin: 20px 0; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="about.html" style="color: #888; text-decoration: none;">About</a>
+                <a href="privacy.html" style="color: #888; text-decoration: none;">Privacy Policy</a>
+                <a href="contact.html" style="color: #888; text-decoration: none;">Contact</a>
+            </div>
+            <div class="copyright">
+                © 2026 AdsFreeStream | Made with ❤️ for ad-free streaming
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to load streams dynamically -->
+    <script>
+        function getStreams() {
+            const streams = localStorage.getItem('adsfreestreams');
+            return streams ? JSON.parse(streams) : [];
+        }
+
+        function loadStreams() {
+            const streams = getStreams();
+            const grid = document.getElementById('stream-grid');
+            const countEl = document.getElementById('stream-count');
+            
+            countEl.textContent = streams.length;
+
+            if (streams.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #888;">
+                        <h3 style="color: #4ecdc4; margin-bottom: 15px;">No streams available</h3>
+                        <p>Check back soon for new streams!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = streams.map(stream => `
+                <a href="stream.html?v=${stream.videoId}&title=${encodeURIComponent(stream.title)}" style="text-decoration: none;">
+                    <div class="stream-card">
+                        <div class="stream-thumbnail">
+                            <img src="${stream.thumbnail}" 
+                                 alt="${stream.title}" 
+                                 onerror="this.src='https://via.placeholder.com/640x360/1a1a1a/4ecdc4?text=Live+Stream'">
+                            <div class="live-badge">🔴 LIVE</div>
+                            <div class="viewers-count">👁️ Watching Now</div>
+                        </div>
+                        <div class="stream-info">
+                            <h3 class="stream-title">${stream.title}</h3>
+                            <div class="stream-meta">
+                                <span>AdsFreeStream</span>
+                                <span class="category-tag">${stream.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Load streams on page load
+        document.addEventListener('DOMContentLoaded', loadStreams);
+    </script>
+
+</body>
+</html>

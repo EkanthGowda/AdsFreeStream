@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch live streams ad-free on AdsFreeStream - Professional streaming platform">
+    <meta name="keywords" content="live stream, gaming, entertainment, ad-free streaming">
+    <title>AdsFreeStream - Live Streaming Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header/Navigation */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .live-badge {
+            background: #ff3838;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 30px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-title {
+            font-size: 28px;
+            margin: 20px 0 10px;
+            font-weight: bold;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 2px solid #333;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .copyright {
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .video-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header/Navigation -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">🎬 AdsFreeStream</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">← Back to Streams</a>
+                <a href="https://www.youtube.com/channel/UC51-9yJC_sBJgNuzW-d9EuA" target="_blank">Channel</a>
+                <span class="live-badge">🔴 LIVE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        
+        <!-- Video Layout (Full Width) -->
+        <div id="live">
+            
+            <!-- Video Section -->
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="video-wrapper">
+                    <iframe 
+                        id="stream-iframe"
+                        src="https://www.youtube.com/embed/uo3G_zYm0wE?autoplay=1&mute=1&vq=hd1080&modestbranding=1&rel=0" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <h1 class="video-title" id="stream-title">🎮 Live Stream - Ad-Free Experience</h1>
+                
+                <div class="video-meta">
+                    <div style="color: #ccc;">
+                        <span style="color: #ff3838; font-weight: bold;">● LIVE</span> | 
+                        AdsFreeStream
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div style="font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">
+                AdsFreeStream
+            </div>
+            <p style="color: #888; margin-bottom: 20px;">
+                Professional streaming platform for the modern creator
+            </p>
+            
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="copyright">
+                © 2026 AdsFreeStream | Made with ❤️ for ad-free streaming
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dynamic Stream -->
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('v');
+        const videoTitle = urlParams.get('title');
+
+        // Update video if parameter exists
+        if (videoId) {
+            const iframe = document.getElementById('stream-iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&vq=hd1080&modestbranding=1&rel=0`;
+        }
+
+        // Update title if parameter exists
+        if (videoTitle) {
+            document.getElementById('stream-title').textContent = decodeURIComponent(videoTitle);
+            document.title = decodeURIComponent(videoTitle) + ' - AdsFreeStream';
+        }
+    </script>
+
+</body>
+</html>
